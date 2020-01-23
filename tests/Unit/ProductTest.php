@@ -19,8 +19,6 @@ class ProductTest extends TestCase
             'price' => 1099,
         ]);
 
-        $formattedPrice = $product->getPrice();
-
         $this->assertEquals('10.99', $product->getPrice());
     }
 }

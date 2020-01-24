@@ -23,6 +23,11 @@ class Cart extends Model
         session()->put('cart', $this);
     }
 
+    public function total()
+    {
+
+    }
+
     public function totalPrice()
     {
         $totalPrice = $this->items->reduce(function ($total, $item) {

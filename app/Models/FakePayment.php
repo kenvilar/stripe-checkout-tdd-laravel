@@ -15,4 +15,9 @@ class FakePayment extends Model
     {
         //
     }
+
+    public function charge()
+    {
+        //
+    }
 }

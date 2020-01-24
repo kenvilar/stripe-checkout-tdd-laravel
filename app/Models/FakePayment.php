@@ -23,4 +23,9 @@ class FakePayment implements PaymentContract
     {
         $this->total = $total;
     }
+
+    public function total()
+    {
+        return $this->total;
+    }
 }

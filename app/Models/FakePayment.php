@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
+use App\Contracts\PaymentContract;
 use Illuminate\Database\Eloquent\Model;
 
-class FakePayment extends Model
+class FakePayment implements PaymentContract
 {
     public function getTestToken()
     {
@@ -16,8 +17,8 @@ class FakePayment extends Model
         //
     }
 
-    public function charge()
+    public function charge($total, $token)
     {
-        //
+        // TODO: Implement charge() method.
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Contracts\PaymentContract;
 use App\Models\Cart;
 use App\Models\FakePayment;
 use App\Models\Product;
@@ -26,6 +27,8 @@ class PurchaseTest extends TestCase
         $cart->add($product, $product->id);
 
         $payment = new FakePayment();
+
+        $this->app->instance(PaymentContract::class, $payment);
 
         $this->post('/orders', [
             'stripeEmail' => 'test@example.com',

@@ -23,11 +23,6 @@ class Cart extends Model
         session()->put('cart', $this);
     }
 
-    public function total()
-    {
-
-    }
-
     public function totalPrice()
     {
         $totalPrice = $this->items->reduce(function ($total, $item) {
@@ -35,5 +30,10 @@ class Cart extends Model
         });
 
         return number_format($totalPrice / 100, 2);
+    }
+
+    public function total()
+    {
+        //
     }
 }

@@ -28,17 +28,15 @@ class CartTest extends TestCase
      */
     public function it_has_a_total_price()
     {
-        $products = factory(Product::class, 3)->create();
+        $products = factory(Product::class, 3)->create([
+            'price' => 1000,
+        ]);
         $cart = new Cart();
 
         foreach ($products as $product) {
             $cart->add($product, $product->id);
         }
 
-        $totalPrice = $products->reduce(function ($total, $product) {
-            return $total + $product->price;
-        });
-
-        $this->assertEquals($totalPrice, $cart->totalPrice());
+        $this->assertEquals('30.00', $cart->totalPrice());
     }
 }

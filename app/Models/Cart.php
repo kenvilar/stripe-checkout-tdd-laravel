@@ -11,6 +11,10 @@ class Cart extends Model
     public function __construct()
     {
         $this->items = collect();
+
+        if (session()->has('cart')) {
+            $this->items = session('cart')->items;
+        }
     }
 
     public function add($product, $key)
@@ -24,6 +28,6 @@ class Cart extends Model
             return $total + $item->price;
         });
 
-        return number_format($totalPrice / 100, '2');
+        return number_format($totalPrice / 100, 2);
     }
 }

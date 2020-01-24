@@ -1,4 +1,3 @@
-<h1>Cart Items</h1>
 @foreach($cart->items as $item)
     <div class="row">
         <div class="col-md-4">

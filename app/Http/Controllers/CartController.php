@@ -11,7 +11,6 @@ class CartController extends Controller
     public function index()
     {
         $cart = new Cart();
-
         return view('cart.index', ['cart' => $cart]);
     }
 

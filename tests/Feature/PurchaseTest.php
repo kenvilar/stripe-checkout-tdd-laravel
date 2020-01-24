@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Cart;
+use App\Models\FakePayment;
 use App\Models\Product;
 use Faker\Provider\Payment;
 use Illuminate\Foundation\Testing\RefreshDatabase;

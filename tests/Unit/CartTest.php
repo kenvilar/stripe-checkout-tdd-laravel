@@ -22,4 +22,23 @@ class CartTest extends TestCase
 
         $this->assertEquals(1, $cart->items->count());
     }
+
+    /**
+     * @test
+     */
+    public function it_has_a_total_price()
+    {
+        $products = factory(Product::class, 3)->create();
+        $cart = new Cart();
+
+        foreach ($products as $product) {
+            $cart->add($product, $product->id);
+        }
+
+        $totalPrice = $products->reduce(function ($total, $product) {
+            return $total + $product->price;
+        });
+
+        $this->assertEquals($totalPrice, $cart->totalPrice());
+    }
 }

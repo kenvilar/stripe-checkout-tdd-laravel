@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class FakePayment implements PaymentContract
 {
+    private $total;
+
     public function getTestToken()
     {
         return 'valid-token';
@@ -14,11 +16,11 @@ class FakePayment implements PaymentContract
 
     public function totalCharged()
     {
-        //
+        return number_format($this->total / 100, 2);
     }
 
     public function charge($total, $token)
     {
-        // TODO: Implement charge() method.
+        $this->total = $total;
     }
 }

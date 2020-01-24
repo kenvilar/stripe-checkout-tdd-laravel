@@ -43,7 +43,7 @@ class CartTest extends TestCase
     /**
      * @test
      */
-    public function it_has_a_total()
+    public function it_has_a_total_in_cents()
     {
         $products = factory(Product::class, 3)->create([
             'price' => 1000,

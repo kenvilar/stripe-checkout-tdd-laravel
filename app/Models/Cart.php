@@ -34,6 +34,8 @@ class Cart extends Model
 
     public function total()
     {
-        //
+        return $this->items->reduce(function ($total, $item) {
+            return $total + $item->price;
+        });
     }
 }

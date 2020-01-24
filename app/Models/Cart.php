@@ -20,6 +20,7 @@ class Cart extends Model
     public function add($product, $key)
     {
         $this->items->put($key, $product);
+        session()->put('cart', $this);
     }
 
     public function totalPrice()

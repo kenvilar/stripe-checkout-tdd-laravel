@@ -18,7 +18,6 @@ class CartController extends Controller
     {
         $cart = new Cart();
         $cart->add($product, $product->id);
-        session()->put('cart', $cart);
         return redirect('/cart');
     }
 }

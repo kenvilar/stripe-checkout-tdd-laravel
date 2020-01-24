@@ -17,4 +17,13 @@ class Cart extends Model
     {
         $this->items->put($key, $product);
     }
+
+    public function totalPrice()
+    {
+        $totalPrice = $this->items->reduce(function ($total, $item) {
+            return $total + $item->price;
+        });
+
+        return number_format($totalPrice / 100, '2');
+    }
 }

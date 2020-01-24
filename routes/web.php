@@ -18,6 +18,8 @@ Route::get('/products', 'ProductsController@index');
 Route::get('/cart', 'CartController@index');
 Route::put('/cart/{product}', 'CartController@update');
 
+Route::post('/orders', 'OrdersController@store');
+
 Route::get('/', function () {
     return view('welcome');
 });

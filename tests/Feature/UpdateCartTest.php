@@ -9,6 +9,8 @@ use Tests\TestCase;
 
 class UpdateCartTest extends TestCase
 {
+    use RefreshDatabase;
+
     /**
      * @test
      */
@@ -21,7 +23,7 @@ class UpdateCartTest extends TestCase
         $response->assertRedirect('/cart');
         $response->assertSessionHas('cart');
 
-        $cart = session('car');
+        $cart = session('cart');
 
         $this->get('/cart')
             ->assertSee($product->name)

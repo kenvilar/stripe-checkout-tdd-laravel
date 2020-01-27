@@ -22,9 +22,15 @@ class OrdersController extends Controller
         $cart = new Cart();
         $this->payment->charge($cart->total(), \request('stripeToken'));
 
-        Order::create([
+        $order = Order::create([
             'email' => \request('stripeEmail'),
             'total' => $this->payment->total(),
         ]);
+
+        foreach ($cart->items as $item) {
+            $order->products()->attach($item->id, [
+                'price' => $item->price,
+            ]);
+        }
     }
 }

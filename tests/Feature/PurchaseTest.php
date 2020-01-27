@@ -62,5 +62,6 @@ class PurchaseTest extends TestCase
         $order = Order::where('email', 'test@example.com')->first();
 
         $this->assertNotNull($order);
+        $this->assertEquals(1, $order->products->count());
     }
 }

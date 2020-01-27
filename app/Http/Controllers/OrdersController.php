@@ -27,10 +27,12 @@ class OrdersController extends Controller
             'total' => $this->payment->total(),
         ]);
 
-        foreach ($cart->items as $item) {
+        $order->addProducts($cart->items);
+
+        /*foreach ($cart->items as $item) {
             $order->products()->attach($item->id, [
                 'price' => $item->price,
             ]);
-        }
+        }*/
     }
 }

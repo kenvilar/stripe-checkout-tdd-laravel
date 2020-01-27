@@ -28,11 +28,5 @@ class OrdersController extends Controller
         ]);
 
         $order->addProducts($cart->items);
-
-        /*foreach ($cart->items as $item) {
-            $order->products()->attach($item->id, [
-                'price' => $item->price,
-            ]);
-        }*/
     }
 }

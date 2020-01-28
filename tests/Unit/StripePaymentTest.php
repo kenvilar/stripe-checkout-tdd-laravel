@@ -42,6 +42,6 @@ class StripePaymentTest extends TestCase
             'api_key' => config('services.stripe.secret'),
         ]);
 
-        $this->assertEquals('10.00', $payment->totalCharged());
+        $this->assertEquals(1000, $charges->data[0]->amount);
     }
 }

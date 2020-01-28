@@ -16,7 +16,7 @@ class StripePaymentTest extends TestCase
 
     private $lastCharge;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $this->lastCharge = $this->lastCharge();

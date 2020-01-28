@@ -14,6 +14,14 @@ class StripePaymentTest extends TestCase
 {
     use RefreshDatabase;
 
+    private $lastCharge;
+
+    public function setUp()
+    {
+        parent::setUp();
+        $this->lastCharge = $this->lastCharge();
+    }
+
     /**
      * @test
      */
@@ -36,12 +44,26 @@ class StripePaymentTest extends TestCase
 
         $payment->charge(1000, $token->id);
 
-        $charges = Charge::all([
+        $this->assertEquals(1, $this->newCharges());
+        $this->assertEquals(1000, $this->lastCharge()->amount);
+    }
+
+    private function lastCharge()
+    {
+        return Charge::all([
             'limit' => 1,
         ], [
             'api_key' => config('services.stripe.secret'),
-        ]);
+        ])->data[0];
+    }
 
-        $this->assertEquals(1000, $charges->data[0]->amount);
+    private function newCharges()
+    {
+        return Charge::all([
+            'limit' => 1,
+            'ending_before' => $this->lastCharge->id,
+        ], [
+            'api_key' => config('services.stripe.secret'),
+        ])->data;
     }
 }

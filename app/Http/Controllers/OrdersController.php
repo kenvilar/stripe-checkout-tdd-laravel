@@ -28,5 +28,7 @@ class OrdersController extends Controller
         ]);
 
         $order->addProducts($cart->items);
+
+        return redirect('/orders');
     }
 }

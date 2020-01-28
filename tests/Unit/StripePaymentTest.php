@@ -48,6 +48,29 @@ class StripePaymentTest extends TestCase
         $this->assertEquals(1000, $this->lastCharge()->amount);
     }
 
+    /**
+     * @test
+     */
+    public function it_has_a_total_charged_in_cents()
+    {
+        $payment = new StripePayment();
+
+        $token = Token::create([
+            'card' => [
+                'number' => '4242424242424242',
+                'exp_month' => 1,
+                'exp_year' => date('Y') + 1,
+                'cvc' => '314',
+            ],
+        ], [
+            'api_key' => config('services.stripe.secret'),
+        ]);
+
+        $payment->charge(1000, $token->id);
+
+        $this->assertEquals(1000, $payment->total());
+    }
+
     private function lastCharge()
     {
         return Charge::all([
@@ -56,6 +79,7 @@ class StripePaymentTest extends TestCase
             'api_key' => config('services.stripe.secret'),
         ])->data[0];
     }
+
 
     private function newCharges()
     {

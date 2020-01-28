@@ -31,10 +31,12 @@ class PurchaseTest extends TestCase
 
         $this->app->instance(PaymentContract::class, $payment);
 
-        $this->post('/orders', [
+        $response = $this->post('/orders', [
             'stripeEmail' => 'test@example.com',
             'stripeToken' => $payment->getTestToken(),
         ]);
+
+        $response->assertRedirect('/orders');
 
         $this->assertEquals('10.00', $payment->totalCharged());
     }

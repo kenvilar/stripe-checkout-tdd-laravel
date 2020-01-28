@@ -34,7 +34,25 @@
                         @endforeach
                     </div>
                     <div class="panel-footer">
+                        <div class="row text-center">
+                            <div class="col-md-9">
+                                <h4 class="text-right">Total <strong>$ {{ $cart->totalPrice() }}</strong></h4>
+                            </div>
+                            <div class="col-md-3">
+                                <form action="/orders" method="post">
+                                    {{csrf_field()}}
+                                    <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                                            data-key="{!! config('services.stripe.key') !!}"
+                                            data-amount="{{ $cart->totalPrice() }}"
+                                            data-name="{{ config('app.name') }}"
+                                            data-description="Test purchase"
+                                            data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+                                    >
 
+                                    </script>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -1,3 +1,4 @@
+<h1>Products</h1>
 @foreach($products as $product)
     <div>
         <h4>{{ $product->name }}</h4>

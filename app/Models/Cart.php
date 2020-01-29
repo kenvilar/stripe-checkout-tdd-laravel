@@ -13,14 +13,14 @@ class Cart extends Model
         $this->items = collect();
 
         if (session()->has('cart')) {
-            $this->items = session('cart')->items;
+            $this->items = session('cart');
         }
     }
 
     public function add($product, $key)
     {
         $this->items->put($key, $product);
-        session()->put('cart', $this);
+        session()->put('cart', $this->items);
     }
 
     public function totalPrice()

@@ -21,4 +21,9 @@ class Order extends Model
             ]);
         }
     }
+
+    public function totalPrice()
+    {
+        return number_format($this->total / 100, 2);
+    }
 }

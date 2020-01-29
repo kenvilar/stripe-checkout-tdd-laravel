@@ -29,6 +29,11 @@ class OrdersController extends Controller
 
         $order->addProducts($cart->items);
 
-        return redirect('/orders');
+        return redirect('/orders/' . $order->id);
+    }
+
+    public function show(Order $order)
+    {
+        return view('orders.show', ['order' => $order]);
     }
 }

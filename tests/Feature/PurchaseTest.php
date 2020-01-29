@@ -32,11 +32,18 @@ class PurchaseTest extends TestCase
         $this->app->instance(PaymentContract::class, $payment);
 
         $response = $this->post('/orders', [
-            'stripeEmail' => 'test@example.com',
+            'stripeEmail' => 'test@email.com',
             'stripeToken' => $payment->getTestToken(),
         ]);
 
-        $response->assertRedirect('/orders');
+        $order = Order::query()->where('email', 'test@email.com')->first();
+
+        $this->assertNotNull($order);
+        $response->assertRedirect('/orders/' . $order->id);
+
+        $this->get('/orders/' . $order->id)
+            ->assertSee('test@email.com')
+            ->assertSee($product->name);
 
         $this->assertEquals('10.00', $payment->totalCharged());
     }
@@ -57,11 +64,11 @@ class PurchaseTest extends TestCase
         $this->app->instance(PaymentContract::class, $payment);
 
         $this->post('/orders', [
-            'stripeEmail' => 'test@example.com',
+            'stripeEmail' => 'test@email.com',
             'stripeToken' => $payment->getTestToken(),
         ]);
 
-        $order = Order::where('email', 'test@example.com')->first();
+        $order = Order::where('email', 'test@email.com')->first();
 
         $this->assertNotNull($order);
         $this->assertEquals(1, $order->products->count());
